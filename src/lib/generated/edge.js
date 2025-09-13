@@ -163,6 +163,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -171,8 +172,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/lib/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          String       @id @default(uuid())\n  email       String       @unique\n  name        String\n  password    String\n  createdAt   DateTime     @default(now())\n  quietBlocks QuietBlock[]\n}\n\nmodel QuietBlock {\n  id        String   @id @default(uuid())\n  userId    String\n  title     String\n  startTime DateTime\n  endTime   DateTime\n  createdAt DateTime @default(now())\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n",
-  "inlineSchemaHash": "3dbb9f01d62435060af36cf30d4df680b15f36ea97c050528f16b2ff6bfedc21",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/lib/generated\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel User {\n  id          String       @id @default(uuid())\n  email       String       @unique\n  name        String\n  password    String\n  createdAt   DateTime     @default(now())\n  quietBlocks QuietBlock[]\n}\n\nmodel QuietBlock {\n  id        String   @id @default(uuid())\n  userId    String\n  title     String\n  startTime DateTime\n  endTime   DateTime\n  createdAt DateTime @default(now())\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n}\n",
+  "inlineSchemaHash": "466ce5d875a7a69195dec09d814769a4a10fafe050faf3cc4acf356ac3c98cce",
   "copyEngine": true
 }
 config.dirname = '/'
