@@ -10,6 +10,7 @@ export async function middleware(req) {
   if (
     url.startsWith("/api/auth/signup") ||
     url.startsWith("/api/auth/login") ||
+    url.startsWith("/") ||
     url.startsWith("/_next") ||
     url === "/favicon.ico"
   ) {
